@@ -1,0 +1,32 @@
+{
+  "name": "flask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
+    "hmr": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "axios": "^0.15.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-wysiwyg": "^2.0.1",
+    "jquery": "^3.1.1",
+    "laravel-elixir-vue-2": "^0.3.0",
+    "socket.io": "^1.4.6",
+    "socket.io-client": "^2.0.2",
+    "webpack": "^3.12.0",
+    "webpack-mix": "^1.1.0"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
+  }
+}
