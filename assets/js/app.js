@@ -1,14 +1,18 @@
 require('bootstrap-sass');
 window.Vue = require('vue');
 
+window.axios = require('axios');
+
 import VueRouter from 'vue-router';
 //https://github.com/vuejs/vue-router/issues/215
+//https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node  - AUTH
 
 import client from 'socket.io-client';
 // const foo = () => import('./Foo.vue');
 
 import foo from './Foo.vue';
 import LoginComponent from './components/login.vue';
+import BoardsComponent from './components/boards.vue';
 
 
 // const socket = client.connect('http://' + document.domain + ':' + location.port + '/test');
@@ -74,6 +78,7 @@ const routes = [
     { path: '/', component: Home },
     { path: '/registration', component: Registration },
     { path: '/login', component: LoginComponent },
+    { path: '/boards', component: BoardsComponent },
     { path: '/foo', component: foo }
 ];
 

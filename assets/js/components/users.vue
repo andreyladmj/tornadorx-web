@@ -3,8 +3,11 @@
         <h1>Users</h1>
 
         <div class="container">
+            <p :show="loading" class="info">Loading...</p>
             <div v-for="user in users">
-
+                <div>
+                    <h3>User: {{user.id}}</h3>
+                </div>
             </div>
         </div>
 
@@ -14,26 +17,23 @@
     export default {
         name: 'users',
         data: function() {
-            return{
-                campaigns: []
+            return {
+                loading: true,
+                users: [],
+                model: {}
             }
         },
 
-        ready: function () {
-            this.fetchCampaigns();
+        created: function () {
+            this.fetchUsers();
         },
 
         methods: {
-            fetchCampaigns: function () {
-                var campaigns = [];
-                this.$http.get('/retention/getCampaigns')
-                    .success(function (campaigns) {
-                        this.$set('campaigns', campaigns);
-
-                    })
-                    .error(function (err) {
-                        campaigns.log(err);
-                    });
+            async fetchUsers () {
+                axios.get('http://127.0.0.1:8000/users').then((response) => {
+                    this.users = response.data;
+                    this.loading = false;
+                });
             },
         }
     }
