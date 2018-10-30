@@ -31,15 +31,21 @@ export default {
         return this.execute('get', `/board/${id}`)
     },
     createBoard (data) {
-        console.log('createBoard', data);
         return this.execute('post', '/boards', data)
     },
-    updateBoard (id, data) {
-        console.log('updateBoard', id, data);
-        return this.execute('put', `/board/${id}`, data)
-        // return this.execute('put', `/boards/${id}`, data)
+    createUser (data) {
+        return this.execute('post', '/users', data)
     },
-    deletePost (id) {
+    updateBoard (id, data) {
+        return this.execute('put', `/board/${id}`, data)
+    },
+    updateUser (id, data) {
+        return this.execute('put', `/user/${id}`, data)
+    },
+    deleteBoard (id) {
+        return this.execute('delete', `/posts/${id}`)
+    },
+    deleteUser (id) {
         return this.execute('delete', `/posts/${id}`)
     }
 }

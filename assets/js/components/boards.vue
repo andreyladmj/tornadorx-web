@@ -10,14 +10,24 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         {{board.name}}
+
+                        <router-link :to="'/board/edit/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
+                        <router-link :to="'/board/delete/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></router-link>
                     </div>
                     <div class="panel-body">
                         {{board.description}}
                     </div>
                     <div class="panel-footer">
                         Tag: {{board.model_tag}}, {{board.date_created}}
-                        <router-link :to="'/board/edit/'+board.board_id"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
                     </div>
+                </div>
+                <div class="bs-callout bs-callout-danger" id="callout-btndropdown-dependency">
+                    <h4>
+                        {{board.name}}
+                        <router-link :to="'/board/edit/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
+                        <router-link :to="'/board/delete/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></router-link>
+                    </h4>
+                    <p>Button dropdowns require the <a href="../javascript/#dropdowns">dropdown plugin</a> to be included in your version of Bootstrap.</p>
                 </div>
             </div>
         </div>

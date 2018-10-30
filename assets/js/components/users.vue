@@ -7,8 +7,10 @@
 
 
             <div class="list-group" v-for="user in users">
-                <router-link :to="'/board/edit/'+board.board_id" tag="a" class="list-group-item">
+                <router-link :to="'/board/edit/'+user.user_id" tag="a" class="list-group-item">
                     {{user.username}}
+                    <router-link :to="'/user/edit/'+user.user_id" class="align-left"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
+                    <router-link :to="'/user/delete/'+user.user_id" class="align-left"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></router-link>
                 </router-link>
             </div>
 
