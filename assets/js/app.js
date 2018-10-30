@@ -13,6 +13,7 @@ import client from 'socket.io-client';
 import foo from './Foo.vue';
 import LoginComponent from './components/login.vue';
 import BoardsComponent from './components/boards.vue';
+import BoardComponent from './components/board.vue';
 
 
 // const socket = client.connect('http://' + document.domain + ':' + location.port + '/test');
@@ -79,6 +80,8 @@ const routes = [
     { path: '/registration', component: Registration },
     { path: '/login', component: LoginComponent },
     { path: '/boards', component: BoardsComponent },
+    { path: '/board/add', component: BoardComponent },
+    { path: '/board/edit/:id', component: BoardComponent, props: true},
     { path: '/foo', component: foo }
 ];
 

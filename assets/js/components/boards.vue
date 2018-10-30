@@ -4,35 +4,33 @@
 
         <div class="container">
 
-            <p :show="loading" class="info">Loading...</p>
+            <p v-if="loading" class="alert alert-warning">Loading...</p>
+            <router-link :to="'/board/add'" tag="p"><a class="btn btn-success">Add Board</a></router-link>
             <div v-for="board in boards">
-                <div>
-                    <h3>{{board.name}}</h3>
-                    <p>{{board.description}}</p>
-                    <p>{{board.tag}}</p>
-                    <p>{{board.date_created}}</p>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {{board.name}}
+                    </div>
+                    <div class="panel-body">
+                        {{board.description}}
+                    </div>
+                    <div class="panel-footer">
+                        Tag: {{board.model_tag}}, {{board.date_created}}
+                        <router-link :to="'/board/edit/'+board.board_id"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <form @submit.prevent="saveBoard">
-                    <h3>{{(model.id ? 'Edit Post ID#' + model.id : 'New Post')}}</h3>
-                    <input type="text" placeholder="Title" v-model="model.title">
-                    <input type="text" placeholder="Description" v-model="model.description">
-                    <input type="text" placeholder="Tag" v-model="model.tag">
-                    <button>Add Board</button>
-                </form>
             </div>
         </div>
 
     </div>
 </template>
 <script>
-    import api from '@/api'
+    import api from '../api'
     //https://developer.okta.com/blog/2018/02/15/build-crud-app-vuejs-node  - AUTH
     export default {
         name: 'boards',
         data: function() {
-            return{
+            return {
                 boards: [],
                 loading: true,
                 model: {}
@@ -45,18 +43,9 @@
 
         methods: {
             async fetchBoards () {
-                axios.get('http://127.0.0.1:8000/boards').then((response) => {
-                    // this.$set('boards', response.data);
-                    this.boards = response.data;
-                    this.loading = false;
-                });
-            },
-            async saveBoard () {
-                if (this.model.id) {
-                    await api.updatePost(this.model.id, this.model)
-                } else {
-                    await api.createPost(this.model)
-                }
+                this.loading = true;
+                this.boards = await api.getBoards();
+                this.loading = false;
             }
         }
     }

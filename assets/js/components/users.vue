@@ -3,12 +3,15 @@
         <h1>Users</h1>
 
         <div class="container">
-            <p :show="loading" class="info">Loading...</p>
-            <div v-for="user in users">
-                <div>
-                    <h3>User: {{user.id}}</h3>
-                </div>
+            <p v-if="loading" class="alert alert-warning">Loading...</p>
+
+
+            <div class="list-group" v-for="user in users">
+                <router-link :to="'/board/edit/'+board.board_id" tag="a" class="list-group-item">
+                    {{user.username}}
+                </router-link>
             </div>
+
         </div>
 
     </div>
@@ -30,10 +33,9 @@
 
         methods: {
             async fetchUsers () {
-                axios.get('http://127.0.0.1:8000/users').then((response) => {
-                    this.users = response.data;
-                    this.loading = false;
-                });
+                this.loading = true;
+                this.users = await api.getUsers();
+                this.loading = false;
             },
         }
     }

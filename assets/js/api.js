@@ -2,9 +2,9 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const client = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'http://172.17.0.5:8000',
     json: true
-})
+});
 
 export default {
     async execute (method, resource, data) {
@@ -21,17 +21,23 @@ export default {
             return req.data
         })
     },
-    getPosts () {
-        return this.execute('get', '/posts')
+    getUsers () {
+        return this.execute('get', '/users')
     },
-    getPost (id) {
-        return this.execute('get', `/posts/${id}`)
+    getBoards () {
+        return this.execute('get', '/boards')
     },
-    createPost (data) {
-        return this.execute('post', '/posts', data)
+    getBoard (id) {
+        return this.execute('get', `/board/${id}`)
     },
-    updatePost (id, data) {
-        return this.execute('put', `/posts/${id}`, data)
+    createBoard (data) {
+        console.log('createBoard', data);
+        return this.execute('post', '/boards', data)
+    },
+    updateBoard (id, data) {
+        console.log('updateBoard', id, data);
+        return this.execute('put', `/board/${id}`, data)
+        // return this.execute('put', `/boards/${id}`, data)
     },
     deletePost (id) {
         return this.execute('delete', `/posts/${id}`)
