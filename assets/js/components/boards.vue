@@ -6,28 +6,15 @@
 
             <p v-if="loading" class="alert alert-warning">Loading...</p>
             <router-link :to="'/board/add'" tag="p"><a class="btn btn-success">Add Board</a></router-link>
-            <div v-for="board in boards">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        {{board.name}}
-
-                        <router-link :to="'/board/edit/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
-                        <router-link :to="'/board/delete/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></router-link>
-                    </div>
-                    <div class="panel-body">
-                        {{board.description}}
-                    </div>
-                    <div class="panel-footer">
-                        Tag: {{board.model_tag}}, {{board.date_created}}
-                    </div>
-                </div>
-                <div class="bs-callout bs-callout-danger" id="callout-btndropdown-dependency">
+            <div class="bs-docs-container">
+                <div class="bs-callout" v-bind:class="getClass(board)" v-for="board in boards">
                     <h4>
                         {{board.name}}
-                        <router-link :to="'/board/edit/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
-                        <router-link :to="'/board/delete/'+board.board_id" class="align-right"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></router-link>
+                        <span class="pull-right" v-on:click="remove(board.board_id)"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></span>
+                        <router-link :to="'/board/edit/'+board.board_id" class="pull-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
                     </h4>
-                    <p>Button dropdowns require the <a href="../javascript/#dropdowns">dropdown plugin</a> to be included in your version of Bootstrap.</p>
+                    <p>{{board.description}}</p>
+                    <p>Tag: {{board.model_tag}} <span class="pull-right">{{board.date_created}}</span></p>
                 </div>
             </div>
         </div>
@@ -56,6 +43,15 @@
                 this.loading = true;
                 this.boards = await api.getBoards();
                 this.loading = false;
+            },
+            getClass (board) {
+                return board.is_active ? 'bs-callout-success' : 'bs-callout-danger';
+            },
+            remove (id) {
+                if(confirm('Are you sure?')) {
+                    api.deleteBoard(id);
+                    this.boards = this.boards.filter((item) => item.board_id !== id)
+                }
             }
         }
     }

@@ -6,6 +6,16 @@ const client = axios.create({
     json: true
 });
 
+let showError = (error) => {
+    const alert = `
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong> ${error}
+    </div>`;
+
+    document.getElementById('error_alerts').insertAdjacentHTML('beforeend', alert);
+};
+
 export default {
     async execute (method, resource, data) {
         // inject the accessToken for each request
@@ -19,6 +29,8 @@ export default {
             // }
         }).then(req => {
             return req.data
+        }).catch(error => {
+            showError(error.response.statusText);
         })
     },
     getUsers () {
@@ -29,6 +41,9 @@ export default {
     },
     getBoard (id) {
         return this.execute('get', `/board/${id}`)
+    },
+    getUser (id) {
+        return this.execute('get', `/user/${id}`)
     },
     createBoard (data) {
         return this.execute('post', '/boards', data)
@@ -43,9 +58,9 @@ export default {
         return this.execute('put', `/user/${id}`, data)
     },
     deleteBoard (id) {
-        return this.execute('delete', `/posts/${id}`)
+        return this.execute('delete', `/board/${id}`)
     },
     deleteUser (id) {
-        return this.execute('delete', `/posts/${id}`)
+        return this.execute('delete', `/user/${id}`)
     }
 }

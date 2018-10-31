@@ -49,13 +49,17 @@
                 this.loading = false;
             },
             async saveBoard () {
+                let res;
+
                 if (this.model.board_id) {
-                    await api.updateBoard(this.model.board_id, this.model);
+                    res = await api.updateBoard(this.model.board_id, this.model);
                 } else {
-                    await api.createBoard(this.model);
+                    res = await api.createBoard(this.model);
                 }
 
-                this.$router.push("/boards")
+                if (res !== undefined) {
+                    this.$router.push("/boards")
+                }
             }
         }
     }

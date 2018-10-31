@@ -14,6 +14,8 @@ import foo from './Foo.vue';
 import LoginComponent from './components/login.vue';
 import BoardsComponent from './components/boards.vue';
 import BoardComponent from './components/board.vue';
+import UsersComponent from './components/users.vue';
+import UserComponent from './components/user.vue';
 
 
 // const socket = client.connect('http://' + document.domain + ':' + location.port + '/test');
@@ -79,9 +81,15 @@ const routes = [
     { path: '/', component: Home },
     { path: '/registration', component: Registration },
     { path: '/login', component: LoginComponent },
+
     { path: '/boards', component: BoardsComponent },
     { path: '/board/add', component: BoardComponent },
     { path: '/board/edit/:id', component: BoardComponent, props: true},
+
+    { path: '/users', component: UsersComponent },
+    { path: '/user/add', component: UserComponent },
+    { path: '/user/edit/:id', component: UserComponent, props: true},
+
     { path: '/foo', component: foo }
 ];
 
