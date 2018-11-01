@@ -1,10 +1,11 @@
 <template>
     <div class="container">
-        <h1>User</h1>
+
+        <router-link to="/users" tag="p"><a class="btn btn-danger pull-right">Return</a></router-link>
+
+        <h1>User {{model.user_id}}</h1>
 
         <div class="container">
-
-            <router-link to="/users" tag="p"><a class="btn btn-danger">Return</a></router-link>
 
             <form @submit.prevent="save">
                 <div class="form-group">
@@ -16,7 +17,7 @@
                     <input type="text" class="form-control" id="password" placeholder="Password" v-model="model.password">
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" v-model="model.is_active"> Is Active</label>
+                    <label><input type="checkbox" v-model="model.is_active">Is Active</label>
                 </div>
 
                 <div class="form-group">
@@ -29,12 +30,13 @@
 
                 <div>
                     <h3>Boards</h3>
+                    <button class="btn btn-primary" v-on:click="toggleCheckboxes()">Select/Unselect All</button>
                     <div class="checkbox" v-for="board in boards">
                         <label><input type="checkbox" :value="board.board_id" v-model="model.boards">{{board.name}}</label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-success">Save</button>
             </form>
         </div>
 
@@ -65,6 +67,21 @@
         },
 
         methods: {
+            toggleCheckboxes() {
+                console.log('this.boards.length', this.boards);
+                console.log('this.model.boards.length', this.model.boards);
+                const needAddAllBoards = this.boards.length !== this.model.boards.length;
+                console.log('needAddAllBoards', needAddAllBoards);
+
+                this.model.boards = [];
+
+                if(needAddAllBoards) {
+                    for (let board in this.boards) {
+                        this.model.boards.push(this.boards[board].board_id)
+                    }
+                }
+                console.log(this.model.boards);
+            },
             async fetchBoards() {
                 this.loading = true;
                 this.boards = await api.getBoards();

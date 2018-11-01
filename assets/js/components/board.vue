@@ -1,10 +1,11 @@
 <template>
     <div class="container">
-        <h1>Board</h1>
+
+        <router-link to="/boards" tag="p"><a class="btn btn-danger pull-right">Return</a></router-link>
+
+        <h1>Board {{model.board_id}}</h1>
 
         <div class="container">
-
-            <router-link to="/boards" tag="p"><a class="btn btn-danger">Return</a></router-link>
 
             <form @submit.prevent="saveBoard">
                 <div class="form-group">
@@ -13,13 +14,13 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" v-model="model.description" rows="3"></textarea>
+                    <textarea class="form-control" id="description" v-model="model.description" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">Tag</label>
                     <input type="text" class="form-control" id="tag" placeholder="Name" v-model="model.model_tag">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-success">Save</button>
             </form>
         </div>
 

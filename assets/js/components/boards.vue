@@ -10,7 +10,7 @@
                 <div class="bs-callout" v-bind:class="getClass(board)" v-for="board in boards">
                     <h4>
                         {{board.name}}
-                        <span class="pull-right" v-on:click="remove(board.board_id)"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></span>
+                        <a href="javascript:void(0);" class="pull-right" v-on:click="remove(board.board_id)"><span class="glyphicon glyphicon-trash btn-lg" aria-hidden="true"></span></a>
                         <router-link :to="'/board/edit/'+board.board_id" class="pull-right"><span class="glyphicon glyphicon-pencil btn-lg" aria-hidden="true"></span></router-link>
                     </h4>
                     <p>{{board.description}}</p>
