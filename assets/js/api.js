@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const client = axios.create({
     // baseURL: 'http://172.17.0.5:8000',
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: 'https://dev-analytics.edusson-data-science.com/api/v1',
     json: true
 });
 

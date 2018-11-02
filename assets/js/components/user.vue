@@ -23,6 +23,7 @@
                 <div class="form-group">
                     <label for="access_level_id">Access level id</label>
                     <select class="form-control" id="access_level_id" v-model="model.access_level_id">
+                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                     </select>
@@ -30,7 +31,7 @@
 
                 <div>
                     <h3>Boards</h3>
-                    <button class="btn btn-primary" v-on:click="toggleCheckboxes()">Select/Unselect All</button>
+                    <a href="javascript:void(0);" class="btn btn-primary" v-on:click="toggleCheckboxes()">Select/Unselect All</a>
                     <div class="checkbox" v-for="board in boards">
                         <label><input type="checkbox" :value="board.board_id" v-model="model.boards">{{board.name}}</label>
                     </div>
